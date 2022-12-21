@@ -1,28 +1,39 @@
 import css from './Statistics.module.css';
 
-const Statistics = ({}) => {
+const randomiseBackgroundColor = () => {
+  var o = Math.round,
+    r = Math.random,
+    s = 255;
+  return (
+    'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 1 + ')'
+  );
+};
+
+const Statistics = ({ title = false, stats }) => {
   return (
     <section className={`${css.statistics}`}>
-      <h2 className={`${css.title}`}>Upload stats</h2>
+      {title.length > 0 ? (
+        <h2 className={`${css.title}`}>{title}</h2>
+      ) : (
+        <h2 className={`${css.title}`}></h2>
+      )}
 
-      <ul className={`${css.stat - list}`}>
-        <li className={`${css.item}`}>
-          <span className={`${css.label}`}>.docx</span>
-          <span className={`${css.percentage}`}>4%</span>
-        </li>
-        <li className={`${css.item}`}>
-          <span className={`${css.label}`}>.mp3</span>
-          <span className={`${css.percentage}`}>14%</span>
-        </li>
-        <li className={`${css.item}`}>
-          <span className={`${css.label}`}>.pdf</span>
-          <span className={`${css.percentage}`}>41%</span>
-        </li>
-        <li className={`${css.item}`}>
-          <span className={`${css.label}`}>.mp4</span>
-          <span className={`${css.percentage}`}>12%</span>
-        </li>
+      <ul className={`${css.statList}`}>
+        {stats.map(el => (
+          <li
+            className={`${css.item}`}
+            key={el.id}
+            style={{
+              background: randomiseBackgroundColor(),
+            }}
+          >
+            <span className={`${css.label}`}>{el.label}</span>
+            <span className={`${css.percentage}`}>{el.percentage}%</span>
+          </li>
+        ))}
       </ul>
     </section>
   );
 };
+
+export default Statistics;
