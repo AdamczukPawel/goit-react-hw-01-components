@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import css from './Statistics.module.css';
 
 const randomiseBackgroundColor = () => {
@@ -15,21 +16,26 @@ const Statistics = ({ title = false, stats }) => {
       {title && <h2 className={`${css.title}`}>{title}</h2>}
 
       <ul className={`${css.statList}`}>
-        {stats.map(el => (
+        {stats.map(stats => (
           <li
             className={`${css.item}`}
-            key={el.id}
+            key={stats.id}
             style={{
               background: randomiseBackgroundColor(),
             }}
           >
-            <span className={`${css.label}`}>{el.label}</span>
-            <span className={`${css.percentage}`}>{el.percentage}%</span>
+            <span className={`${css.label}`}>{stats.label}</span>
+            <span className={`${css.percentage}`}>{stats.percentage}%</span>
           </li>
         ))}
       </ul>
     </section>
   );
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.array.isRequired,
 };
 
 export default Statistics;
