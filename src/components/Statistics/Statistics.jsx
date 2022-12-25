@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 import css from './Statistics.module.css';
 
 const randomiseBackgroundColor = () => {
@@ -35,7 +35,7 @@ const Statistics = ({ title = false, stats }) => {
 
 Statistics.propTypes = {
   title: PropTypes.string,
-  stats: PropTypes.array.isRequired,
+  stats: PropTypes.arrayOf(PropTypes.shape({id:PropTypes.string.isRequired, label:string.isRequired, percentage:PropTypes.number.isRequired})).isRequired,
 };
 
 export default Statistics;
